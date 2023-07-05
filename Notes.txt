@@ -1,0 +1,11 @@
+*************************** Lecture 23  **********************
+
+* Render - >We render the files in app.js in class based componet. Render is a lifecycle method, jab react kisi component ko load karti hai to series of method load hote hai and that is lifecycle method
+
+* In class based compmnents of react the syntax changes like we use peops and state in a different manner here
+
+*  Now what we wanna do over here is that we will craete a news app named "Smart NEWS". It will hava a nav bar then we will make a news container component below it and inside it there will be news items having different news and then when we will click on those news items, a news detail page will open which will have that news.
+
+*  We will use news api over here
+
+* Rce is a snippet for class based component and rcep is class based component with props set up.
