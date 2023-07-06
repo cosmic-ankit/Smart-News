@@ -33,3 +33,25 @@ But here we are using the destructuring the titlle will get the first value of t
 Md-4 means this column will take the size of 4 columns
 
 
+**************** Lecture 25 ******************************
+
+Understanding state in class based component :-
+
+* To use state we declare a constructor in which we call super() method. Then we make an object of state using
+
+this.state = { 
+    count:0,
+    hello: "Hello
+}
+
+* then we can directly use their value in the constructor by using  this.state.count
+
+* To update the value of state we use this.setstate() method. 
+ this.setState({ count: this.state.count + 1 });
+
+*******************************************
+
+* btn-sm is the bootstrap class used to make a button smaller
+
+
+
