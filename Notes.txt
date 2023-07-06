@@ -9,3 +9,27 @@
 *  We will use news api over here
 
 * Rce is a snippet for class based component and rcep is class based component with props set up.
+
+
+********************** Lecture 24 *************************
+
+* So in this lecture i have created an api from news api and made a json filr where i have extracted the top headline ka  data.
+
+* We have given the body to the news item using the bootstrap component of card.
+
+* In class bassed component to use props we use this.props.propname.
+
+* this.props is an object
+
+*   let {title, discreption} = this.props;
+But here we are using the destructuring the titlle will get the first value of this.props that is also title and discreption will get the second value of this.props which is the discreption itself. so we can use title and discreption in the whole compmnent directly
+
+* We are passing title and discreption as a props in news items through NewsContainer
+
+* To make row in bootstrap we use row class
+* To make column in bootstrap we use column class
+
+* In bootstrap there can be a 12 column in a row, so md -4 is a class which makes the width of the column.
+Md-4 means this column will take the size of 4 columns
+
+

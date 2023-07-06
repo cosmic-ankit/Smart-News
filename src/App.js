@@ -13,6 +13,9 @@ export class App extends Component {
     return (
       <div>
         <NavBar/>
+
+
+
         <NewsContainer/>
 
 
