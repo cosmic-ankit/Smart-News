@@ -54,4 +54,10 @@ this.state = {
 * btn-sm is the bootstrap class used to make a button smaller
 
 
+************************ Lecture 26 ****************************
+
+* So here we have created a map function to iterate over the every elenent in an array and then  we are passing the props through it.
+
+* We have limited the length of decription and title sp that there will be uniformity in each card
+
 
