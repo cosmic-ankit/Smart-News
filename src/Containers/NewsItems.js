@@ -13,16 +13,16 @@ export class NewsItems extends Component {
 
         return (
             <div>
-                News Items
+                
 
 {/* Making card from bootstrap here */}
 
-                <div className="card" style={{width: "18rem"}}>
-                    <img className="card-img-top" src={imgUrl} alt="Card image cap"/>
+                <div className="card my-2 card-deck" style={{width: "18rem"}}>
+                    <img className="card-img-top" src={!imgUrl? "https://images4.alphacoders.com/131/1315826.jpg" :imgUrl} alt="Card image cap" class="img-fluid" style= {{objectFit: "cover", height: "200px", width:"300px"}} />
                         <div className="card-body">
-                            <h5 className="card-title">{title} </h5>
+                            <h5 className="card-title">{title} ...</h5>
                             <p className="card-text">{description} ...</p>
-                            <a href={newsUrl}  target = "_blank" className="btn btn-primary btn-sm">Read More</a>
+                            <a href={ newsUrl}  target = "_blank" className="btn btn-primary btn-sm">Read More</a>
                             {/* Giving btn-sm class here to make the button smaller */}
                         </div>
                 </div>
