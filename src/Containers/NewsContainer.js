@@ -8,33 +8,78 @@ export class NewsContainer extends Component {
     // articles =
     //     [
     //     ]
-        // This article is an array of onjects
+    // This article is an array of onjects
 
     constructor() // Whenever the object of this class will be make it will run, hence it will run for each time newsItem would be called.
     {
         super();
         this.state = {
             articles: [],
-            loading: false
+            loading: false,
+            page: 1,
         }
 
-        
+
     }
 
-    async componentDidMount () {
+    async componentDidMount() {
 
-        let url = "https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162";
+        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=21`;
 
-        let data = await fetch (url);
+        let data = await fetch(url);
 
         let parseData = await data.json();
 
         console.log(parseData);
 
-        this.setState({ articles : parseData.articles});
+        this.setState({ articles: parseData.articles,
+        totalArticles: parseData.totalResults});
 
 
     }
+
+    NextPage = async () => {
+
+       await this.setState({ page: this.state.page + 1, })
+
+        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=21`;
+
+        console.log("Page = " + this.state.page);
+
+        let data = await fetch(url);
+
+        let parseData = await data.json();
+
+        console.log(parseData);
+
+       await this.setState({ articles: parseData.articles });
+
+
+    }
+
+    PrevPage = async () => {
+
+        await this.setState({ page: this.state.page - 1, })
+
+        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=21`;
+
+        console.log("Page = " + this.state.page);
+
+        let data = await fetch(url);
+
+        let parseData = await data.json();
+
+        console.log(parseData);
+
+        await this.setState({ articles: parseData.articles });
+
+
+
+
+
+    }
+
+    // Its a promise function which will get exectued after the newscontainer will render, then it will fetch the data . Parsedata will wait till it wont fetch the data then it will convert it into .json file. And then we will set the article to the parsed data.
 
     render() {
 
@@ -42,17 +87,49 @@ export class NewsContainer extends Component {
 
 
         return (
-            <div>
+            <>
+                <div>
 
-                <div className="container my-3">
-                    { }
+                    <div className="container my-3">
+                        { }
 
 
-                    {/* Text centre is a class used to make the text centre in bootstrap */}
-                    <div className="text-center my-4">
-                        <h1>News that makes u Smart</h1>
+                        {/* Text centre is a class used to make the text centre in bootstrap */}
+                        <div className="text-center my-4">
+                            <h1>News that makes u Smart</h1>
+                        </div>
+
+
+
+
+
+
+
+
+
+                        {/* Adding news items over here */}
+
+                        {/* Creating row and columns. In bootstrap a row can have 12 column, md-4 means this column will take the size of 4 columns. Md class is used to decide the width of a column */}
+
+
+                        <div className="row">
+
+                            {this.state.articles.map((element) => (
+
+                                <div className="col-md-4 row-md-4" >
+                                    < NewsItems title={element.title ? element.title.slice(0, 40) : ""} key={element.url} description={element.description ? element.description.slice(0, 88) : ""} newsUrl={element.url} imgUrl={element.urlToImage} />
+                                    {/* Passing title and newsitems as a prop */}
+                                    {/* Whenever we use map function we have to make a key for every element in it so we are assigning a key of url of a news since it is unique for each element */}
+                                </div>
+                            ))}
+
+                            {/* // It uses the map function to iterate over the articles array in the state and renders a <NewsItems/> component for each element. The key prop is set to element.url to provide a unique identifier for each rendered component. */}
+
+                        </div>
+
                     </div>
 
+                </div >
 
 
 
@@ -61,43 +138,16 @@ export class NewsContainer extends Component {
 
 
 
-                    {/* Adding news items over here */}
+                <div className="d-flex justify-content-between container my-4">
 
-                    {/* Creating row and columns. In bootstrap a row can have 12 column, md-4 means this column will take the size of 4 columns. Md class is used to decide the width of a column */}
-
-
-                    <div className="row">
-
-                        {this.state.articles.map((element) => (
-
-                             <div className = "col-md-4 row-md-4" >
-                        < NewsItems title={element.title?element.title.slice(0,40): ""} key = {element.url} description={element.description? element.description.slice(0,88):""} newsUrl={element.url}  imgUrl = {element.urlToImage}/>
-                        {/* Passing title and newsitems as a prop */}
-                        {/* Whenever we use map function we have to make a key for every element in it so we are assigning a key of url of a news since it is unique for each element */}
-                    </div>
-                    ))}
-                    
-{/* // It uses the map function to iterate over the articles array in the state and renders a <NewsItems/> component for each element. The key prop is set to element.url to provide a unique identifier for each rendered component. */}
-
-
-
-
-
-
-
-
-
+                    <button disabled={this.state.page <= 1} type="button" className="btn btn-primary" onClick={this.PrevPage}> &larr;	Previous</button>
+                    <button disabled={this.state.page > (this.state.totalArticles/21)} type="button" className="btn btn-primary" onClick={this.NextPage}> &rarr; Next</button>
                 </div>
 
+            </>
 
 
-
-
-            </div>
-
-
-        </div >
-    )
+        )
     }
 }
 
