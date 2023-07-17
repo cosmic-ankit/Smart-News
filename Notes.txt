@@ -61,3 +61,47 @@ this.state = {
 * We have limited the length of decription and title sp that there will be uniformity in each card
 
 
+
+************************* Lectures 27 ********************************
+
+************ App.css 
+
+We have added css so that each card will get the equal size.
+********* NewsContainer.js 
+
+We have erased the data of json file.
+We are fetching data directly from news using fetch api.
+We have set the article to empty array
+Then we have used ComponnetDidMount promise function to fetch the api, converted it into json and set it to the articles.
+Then we have given that if title or description will be empty set it to ""
+
+*********************** NewsItem.js
+
+We have erased the news items description from news items
+And if image will be empty set it to breaking bad image.
+
+
+
+
+
+
+
+
+
+
+************************** Lecture 28 *****************************
+
+*************** Setting Up the light and dark mode 
+
+So we have done some work in setting up the light and dark mode first.
+We will debug it and do the further work in next commit.
+************ Setting up the page 
+
+Then we have added the another parameter of page in the state that will keep the track of our page.
+We have also added the total article in the state.
+*********** Creating Next and Previous buttons 
+
+We have added two buttons next and prev in news container, we have also given them html signs
+Things functions will be disabled :- Prev page -> If page is less than equal to 1, Next Page -> If page is greater than total article/ page size 's Greatest integer
+And we have added a two function that fires when we click on there respective buuton, we will add or subract the page accordingly and then update the url and then fetch and parse there data.
+We have added the page size and page in url to navigate the page with some fix no of articles.

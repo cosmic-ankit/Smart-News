@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import NewsItems from './NewsItems'
+import React, { Component } from 'react';
+import NewsItems from './NewsItems';
+import Spinner from './Spinner';
 
 export class NewsContainer extends Component {
 
@@ -15,16 +16,20 @@ export class NewsContainer extends Component {
         super();
         this.state = {
             articles: [],
-            loading: false,
+            loading: true,
             page: 1,
         }
+
+        
+
+
 
 
     }
 
     async componentDidMount() {
 
-        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=21`;
+        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
 
         let data = await fetch(url);
 
@@ -32,17 +37,25 @@ export class NewsContainer extends Component {
 
         console.log(parseData);
 
-        this.setState({ articles: parseData.articles,
-        totalArticles: parseData.totalResults});
+        this.setState({
+            articles: parseData.articles,
+            totalArticles: parseData.totalResults,
+            loading: false,
+
+        });
 
 
     }
 
     NextPage = async () => {
 
-       await this.setState({ page: this.state.page + 1, })
+         
+        this.setState({ loading: true })
 
-        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=21`;
+        await this.setState({ page: this.state.page + 1, })
+        
+        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+
 
         console.log("Page = " + this.state.page);
 
@@ -52,16 +65,24 @@ export class NewsContainer extends Component {
 
         console.log(parseData);
 
-       await this.setState({ articles: parseData.articles });
+        await this.setState({ articles: parseData.articles, loading: false, });
+
+        // Scroll to the top of the container
+        
+        window.scrollTo(0, 0);
+
+
 
 
     }
 
     PrevPage = async () => {
-
+        
+        this.setState({ loading: true })
         await this.setState({ page: this.state.page - 1, })
 
-        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=21`;
+        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+
 
         console.log("Page = " + this.state.page);
 
@@ -71,7 +92,10 @@ export class NewsContainer extends Component {
 
         console.log(parseData);
 
-        await this.setState({ articles: parseData.articles });
+        await this.setState({ articles: parseData.articles, loading: false, });
+
+        window.scrollTo(0, 0);
+
 
 
 
@@ -91,13 +115,19 @@ export class NewsContainer extends Component {
                 <div>
 
                     <div className="container my-3">
-                        { }
+
 
 
                         {/* Text centre is a class used to make the text centre in bootstrap */}
                         <div className="text-center my-4">
                             <h1>News that makes u Smart</h1>
                         </div>
+
+                        <div className="text-center">
+                            {this.state.loading && <Spinner />}
+                        </div>
+
+
 
 
 
@@ -112,7 +142,7 @@ export class NewsContainer extends Component {
                         {/* Creating row and columns. In bootstrap a row can have 12 column, md-4 means this column will take the size of 4 columns. Md class is used to decide the width of a column */}
 
 
-                        <div className="row">
+              {    !this.state.loading &&      <div className="row">
 
                             {this.state.articles.map((element) => (
 
@@ -123,13 +153,14 @@ export class NewsContainer extends Component {
                                 </div>
                             ))}
 
-                            {/* // It uses the map function to iterate over the articles array in the state and renders a <NewsItems/> component for each element. The key prop is set to element.url to provide a unique identifier for each rendered component. */}
+                            {/* // It uses the map function to iterate      over the articles array in the state and renders a <NewsItems/> component for each element. The key prop is set to element.url to provide a unique identifier for each rendered component. */}
 
                         </div>
+    }
 
                     </div>
 
-                </div >
+                </div > 
 
 
 
@@ -141,7 +172,10 @@ export class NewsContainer extends Component {
                 <div className="d-flex justify-content-between container my-4">
 
                     <button disabled={this.state.page <= 1} type="button" className="btn btn-primary" onClick={this.PrevPage}> &larr;	Previous</button>
-                    <button disabled={this.state.page > (this.state.totalArticles/21)} type="button" className="btn btn-primary" onClick={this.NextPage}> &rarr; Next</button>
+
+
+                    <button disabled={this.state.page > Math.ceil(this.state.totalArticles / this.props.pageSize)} type="button" className="btn btn-primary" onClick={this.NextPage}> &rarr; Next</button>
+                    {/*  We use this.props.propName ti access props in class based component */}
                 </div>
 
             </>
