@@ -24,6 +24,27 @@ export class NavBar extends Component {
         <li className="nav-item">
           <a className="nav-link" href="#">Pricing</a>
         </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Business</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">General</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Health</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Science</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Sports</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Technology</a>
+        </li>
+
+        {/* Making categories in navbar */}
+        {/* Shift + Alt + Click for multiple cursors*/}
         
       </ul>
 

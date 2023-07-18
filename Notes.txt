@@ -105,3 +105,39 @@ We have added two buttons next and prev in news container, we have also given th
 Things functions will be disabled :- Prev page -> If page is less than equal to 1, Next Page -> If page is greater than total article/ page size 's Greatest integer
 And we have added a two function that fires when we click on there respective buuton, we will add or subract the page accordingly and then update the url and then fetch and parse there data.
 We have added the page size and page in url to navigate the page with some fix no of articles.
+
+
+******************* Lecture 29 ******************
+
+**************** Spinner. js 
+
+* So what we are doing is we have created a spinner using spinner gif. We have assigned a componet for it.
+* We are importing the gif from loading.gif
+* And then we have set its height and width
+
+********** News Container 
+
+* So what we are doing here is we have created  a state of loading and assigned it true by default. 
+* We have assigned it below the heading 
+*                          <div className="text-center">
+                            {this.state.loading && <Spinner />}
+                        </div>
+
+* So the spinner will only execute when its value will be true, by default it is true, then we use setstate method to do it false.
+* As soon as the data get parse, we do it false 
+* this.setState({
+            articles: parseData.articles,
+            totalArticles: parseData.totalResults,
+            loading: false,
+
+        });
+* So we have done the same in next and previous function as well, as we click on it the loading become true and when the data get parse we set it to false.
+
+
+*               {    !this.state.loading &&      <div className="row">
+* We have added this for news item for loop, so that till the state is true the previous page cards dont show and only loading item get show
+
+
+*********************** Addding Page Size in props 
+
+* We have made page size as a prop and now we are taking its value from app.js

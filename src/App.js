@@ -43,7 +43,7 @@ export class App extends Component {
 
 
 
-        <NewsContainer mode={this.mode} pageSize={21} />
+        <NewsContainer mode={this.mode} pageSize={15}  /> 
 
         {/* Sending the props for page size */}
 

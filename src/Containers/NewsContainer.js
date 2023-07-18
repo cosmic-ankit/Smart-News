@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import NewsItems from './NewsItems';
 import Spinner from './Spinner';
+import PropTypes from 'prop-types'
+//impt to import proptypes
 
 export class NewsContainer extends Component {
+
+
+    // Initializing default props and proptypes here. In class based componet we use static to craete default props and proptypes
+
+    static defaultProps = {
+        country: 'us',
+        category: 'general',
+        pageSize: `15`
+
+    }
+
+    static propTypes = {
+        country : PropTypes.string, // PTS in vs code
+        category : PropTypes.string,
+        pageSize: PropTypes.number
+    }
+
+    // business entertainment general health science sports technology
 
 
     // We have made an array by article name and have
@@ -22,6 +42,8 @@ export class NewsContainer extends Component {
 
         
 
+        
+
 
 
 
@@ -29,7 +51,9 @@ export class NewsContainer extends Component {
 
     async componentDidMount() {
 
-        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+
+// Now we will use props to pass in these category and country
 
         let data = await fetch(url);
 
@@ -54,7 +78,7 @@ export class NewsContainer extends Component {
 
         await this.setState({ page: this.state.page + 1, })
         
-        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
 
 
         console.log("Page = " + this.state.page);
@@ -81,7 +105,9 @@ export class NewsContainer extends Component {
         this.setState({ loading: true })
         await this.setState({ page: this.state.page - 1, })
 
-        let url = `https://newsapi.org/v2/everything?q=technology&from=2023-07-07&to=2023-07-07&sortBy=popularity&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+
+        // use & to include every source (to format a correct url)
 
 
         console.log("Page = " + this.state.page);
@@ -114,7 +140,7 @@ export class NewsContainer extends Component {
             <>
                 <div>
 
-                    <div className="container my-3">
+                    <div className="container my-3 align-items-center justify-content-center">
 
 
 
@@ -146,8 +172,8 @@ export class NewsContainer extends Component {
 
                             {this.state.articles.map((element) => (
 
-                                <div className="col-md-4 row-md-4" >
-                                    < NewsItems title={element.title ? element.title.slice(0, 40) : ""} key={element.url} description={element.description ? element.description.slice(0, 88) : ""} newsUrl={element.url} imgUrl={element.urlToImage} />
+                                <div className="col-md-4 " >
+                                    < NewsItems title={element.title ? element.title.slice(0, 40) : ""} key={element.url} description={element.description ? element.description.slice(0, 75) : ""} newsUrl={element.url} imgUrl={element.urlToImage} />
                                     {/* Passing title and newsitems as a prop */}
                                     {/* Whenever we use map function we have to make a key for every element in it so we are assigning a key of url of a news since it is unique for each element */}
                                 </div>
@@ -174,7 +200,10 @@ export class NewsContainer extends Component {
                     <button disabled={this.state.page <= 1} type="button" className="btn btn-primary" onClick={this.PrevPage}> &larr;	Previous</button>
 
 
-                    <button disabled={this.state.page > Math.ceil(this.state.totalArticles / this.props.pageSize)} type="button" className="btn btn-primary" onClick={this.NextPage}> &rarr; Next</button>
+                    <button disabled={this.state.page+1 > Math.ceil(this.state.totalArticles / this.props.pageSize)|| ((this.props.pageSize)*(this.state.page+1))>100} type="button" className="btn btn-primary" onClick={this.NextPage}> &rarr; Next</button>
+
+                    {/* We have fixed the bug here the api gives maximum 100 articles, so we have written the condition for it over here */}
+
                     {/*  We use this.props.propName ti access props in class based component */}
                 </div>
 
@@ -186,3 +215,6 @@ export class NewsContainer extends Component {
 }
 
 export default NewsContainer;
+
+
+// There are two endpoints in news api(everything and top-healines) and we can give sources ex country and category only in top-headlines, so we will use top headlines here.
