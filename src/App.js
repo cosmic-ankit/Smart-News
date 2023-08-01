@@ -1,5 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
 
 import React, { Component } from 'react'
 import NavBar from './Containers/NavBar';
@@ -37,13 +43,33 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <NavBar mode={this.mode} setMode={this.setMode} />
+
+        <BrowserRouter> 
+
+
+
+            <NavBar mode={this.mode} setMode={this.setMode} />
+
+            <Routes>
+            <Route path='/Business'  element={ < NewsContainer  key = "Business" mode={this.mode} pageSize={15} category={'business'} />}  />
+
+            <Route path='/'   element={ < NewsContainer key = "/" mode={this.mode} pageSize={15} category={'general'} />}  />
+
+            <Route path='/Health'  element={ < NewsContainer  key = "Health" mode={this.mode} pageSize={15} category={'health'} />}  />
+
+            <Route path='/Science'   element={ < NewsContainer  key = "Science" mode={this.mode} pageSize={15} category={'science'} />}  />
+
+            <Route path='/Sports'   element={ < NewsContainer key = "Sports" mode={this.mode} pageSize={15} category={'sports'} />}  />
+
+            <Route path='/Technology'  element={ < NewsContainer key = "Technology"  mode={this.mode} pageSize={15} category={'technology'} />}  />
+
+            </Routes>
 
 
 
 
 
-        <NewsContainer mode={this.mode} pageSize={15}  /> 
+         
 
         {/* Sending the props for page size */}
 
@@ -52,7 +78,9 @@ export class App extends Component {
 
 
 
+      </BrowserRouter>
       </div>
+
     )
   }
 }

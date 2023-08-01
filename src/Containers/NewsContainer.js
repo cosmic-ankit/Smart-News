@@ -173,7 +173,7 @@ export class NewsContainer extends Component {
                             {this.state.articles.map((element) => (
 
                                 <div className="col-md-4 " >
-                                    < NewsItems title={element.title ? element.title.slice(0, 40) : ""} key={element.url} description={element.description ? element.description.slice(0, 75) : ""} newsUrl={element.url} imgUrl={element.urlToImage} />
+                                    < NewsItems title={element.title ? element.title.slice(0, 40) : ""} key={element.url} description={element.description ? element.description.slice(0,85) : ""} newsUrl={element.url} imgUrl={element.urlToImage} />
                                     {/* Passing title and newsitems as a prop */}
                                     {/* Whenever we use map function we have to make a key for every element in it so we are assigning a key of url of a news since it is unique for each element */}
                                 </div>

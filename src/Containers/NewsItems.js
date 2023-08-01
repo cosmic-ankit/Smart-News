@@ -17,8 +17,8 @@ export class NewsItems extends Component {
 
 {/* Making card from bootstrap here */}
 
-                <div className="card my-2 card-deck " style={{width: "18rem" }}>
-                    <img className="card-img-top" src={!imgUrl? "https://images4.alphacoders.com/131/1315826.jpg" :imgUrl} alt="Card image cap" class="img-fluid" style= {{objectFit: "cover", height: "200px", width:"300px"}} />
+                <div className="card my-2 card-deck " >
+                    <img className="card-img-top" src={!imgUrl? "https://images4.alphacoders.com/131/1315826.jpg" :imgUrl} alt="Card image cap" class="img-fluid" style= {{objectFit: "cover", height: "200px", width:"420px"}} />
                         <div className="card-body">
                             <h5 className="card-title" style={{height:'50px'}}>{title} ...</h5>
                             <p className="card-text" style={{height:'50px'}}>{description} ...</p>
