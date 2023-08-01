@@ -143,3 +143,61 @@ We have added the page size and page in url to navigate the page with some fix n
 * We have made page size as a prop and now we are taking its value from app.js
 
 
+
+
+***************** Lecture 31 *****************************
+
+* So here we have changed the cards size, we have removed the default width and thats made the application responsive
+
+* We have changed the image size in card and the no of words limit in a description
+
+*********** Routing
+
+* To do routing first import in app.js
+
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+} from "react-router-dom";
+
+* Now here we are gonna envelope everything in the BrowserRouter
+BrowserRouter->Routes->Routes (In which the element is present)
+
+<BrowserRouter>
+
+            <Routes>
+
+            <Route path='/Business'  element={ < NewsContainer  key = "Business" mode={this.mode} pageSize={15} category={'business'} />}  />
+
+            <Route path='/Business'  element={ < NewsContainer  key = "Business" mode={this.mode} pageSize={15} category={'business'} />}  />
+
+            <Routes>
+
+</BrowserRouter>
+
+* Here the path is the same link that will be given to business in the navbar so when we click on these elements on navbar, this route will be called
+
+* Here we are giving the key, so that the compiler would know its a differnt news componet hence it render it again when we click on it.
+
+* Import link in Nvabar.js
+import {
+  Link,
+  
+} from "react-router-dom";
+
+
+* And replace every anchor tag <a> with <Link> and every href= with "to=" in whole page, to use the router
+
+*  <li className="nav-item">
+         <Link className="nav-link" to="/Business">Business</Link>
+   </li>
+
+* Change the link to the path that u wanna fire whenever we click on it.
+
+
+
+
+
