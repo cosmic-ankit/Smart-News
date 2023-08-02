@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom';
+
 
 import {
   Link,
@@ -24,29 +26,29 @@ export class NavBar extends Component {
       <ul className="navbar-nav">
 
         <li className="nav-item">
-         <Link className="nav-link " aria-current="page" to="/">Home</Link>
+         <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
         </li>
        
         <li className="nav-item">
-         <Link className="nav-link" to="/Business">Business</Link>
+         <NavLink className="nav-link" to="/Business">Business</NavLink>
         </li>
 
         
 
         <li className="nav-item">
-         <Link className="nav-link" to="/Health">Health</Link>
+         <NavLink className="nav-link" to="/Health">Health</NavLink>
         </li>
 
         <li className="nav-item">
-         <Link className="nav-link" to="/Science">Science</Link>
+         <NavLink className="nav-link" to="/Science">Science</NavLink>
         </li>
 
         <li className="nav-item">
-         <Link className="nav-link" to="/Sports">Sports</Link>
+         <NavLink className="nav-link" to="/Sports">Sports</NavLink>
         </li>
 
         <li className="nav-item">
-         <Link className="nav-link" to="/Technology">Technology</Link>
+         <NavLink className="nav-link" to="/Technology">Technology</NavLink>
         </li>
 
         {/* Making categories in navbar */}

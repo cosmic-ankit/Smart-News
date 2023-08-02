@@ -199,5 +199,31 @@ import {
 
 
 
+******************* Lecture 32 *******************
 
+********** App. js
 
+We have removed the dark and light mode as it seems to be of no use here. We will add it in last if require
+********* NavBar.js
+
+We have made the navbar and the buttons in dark mode.
+
+We are using NavLink component from react Router dom, It make the link active when it maatches the current url is when we click on anything in navbar it will becomme active
+  <NavLink className="nav-link" to="/Technology">Technology</NavLink>
+
+********* NewsContainer.js
+
+We are fetching author and Published At from news api
+Then we are passing them as a props in news items.
+
+We have made the next and previous button darker
+********* NewsItems.js
+
+Destructuring author and date
+
+We have fixed the card by assigning the required amount of style to title, desc, date auth and read more paragraph
+
+We have made the cards responsive
+
+{new Date(date).toGMTString().slice(0, 11)}
+Using the js date object and its method to get the date in gmt format and then we have sliced the date so that we can get the required amount of date
