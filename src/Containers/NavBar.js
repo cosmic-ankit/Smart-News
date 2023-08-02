@@ -11,10 +11,10 @@ export class NavBar extends Component {
       <div>
 
 
-<nav className="navbar navbar-expand-lg navbar-light bg-light">
+<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
   <div className="container-fluid">
-   <Link className="navbar-brand" to="#">Smart News</Link>
+   <Link className="navbar-brand" to="/">Smart News</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -57,13 +57,7 @@ export class NavBar extends Component {
       
     </div>
 
-    <div className={`form-check form-switch mx-3 text-${this.mode==="light"?"black":"white"}`}>
-  {/* text-light class do the text in white and text-dark in black */}
 
-  <input className="form-check-input " type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-  <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Switch Mode</label>
-
-  </div>
   
 
   </div>

@@ -173,7 +173,7 @@ export class NewsContainer extends Component {
                             {this.state.articles.map((element) => (
 
                                 <div className="col-md-4 " >
-                                    < NewsItems title={element.title ? element.title.slice(0, 40) : ""} key={element.url} description={element.description ? element.description.slice(0,85) : ""} newsUrl={element.url} imgUrl={element.urlToImage} />
+                                    < NewsItems title={element.title ? element.title.slice(0, 40) : ""} key={element.url} description={element.description ? element.description.slice(0,50) : "Click On To Read More"} newsUrl={element.url} imgUrl={element.urlToImage} author = {element.author?element.author.slice(0,14):"Unknown"} date = {element.publishedAt}/>
                                     {/* Passing title and newsitems as a prop */}
                                     {/* Whenever we use map function we have to make a key for every element in it so we are assigning a key of url of a news since it is unique for each element */}
                                 </div>
@@ -197,10 +197,10 @@ export class NewsContainer extends Component {
 
                 <div className="d-flex justify-content-between container my-4">
 
-                    <button disabled={this.state.page <= 1} type="button" className="btn btn-primary" onClick={this.PrevPage}> &larr;	Previous</button>
+                    <button disabled={this.state.page <= 1} type="button" className="btn btn-dark" onClick={this.PrevPage}> &larr;	Previous</button>
 
 
-                    <button disabled={this.state.page+1 > Math.ceil(this.state.totalArticles / this.props.pageSize)|| ((this.props.pageSize)*(this.state.page+1))>100} type="button" className="btn btn-primary" onClick={this.NextPage}> &rarr; Next</button>
+                    <button disabled={this.state.page+1 > Math.ceil(this.state.totalArticles / this.props.pageSize)|| ((this.props.pageSize)*(this.state.page+1))>100} type="button" className="btn btn-dark" onClick={this.NextPage}> &rarr; Next</button>
 
                     {/* We have fixed the bug here the api gives maximum 100 articles, so we have written the condition for it over here */}
 

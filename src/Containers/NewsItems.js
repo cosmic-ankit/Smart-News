@@ -8,23 +8,31 @@ export class NewsItems extends Component {
 
 
     render() {
-        let {title, description , newsUrl, imgUrl } = this.props;
+        let { title, description, newsUrl, imgUrl, author, date } = this.props;
         // Using destructuring here. Title and description will get there respective value from the this.props object. We can use title and description directly now insetead of using this.props.title and this.props.description
 
         return (
             <div>
-                
 
-{/* Making card from bootstrap here */}
 
-                <div className="card my-2 card-deck " >
-                    <img className="card-img-top" src={!imgUrl? "https://images4.alphacoders.com/131/1315826.jpg" :imgUrl} alt="Card image cap" class="img-fluid" style= {{objectFit: "cover", height: "200px", width:"420px"}} />
-                        <div className="card-body">
-                            <h5 className="card-title" style={{height:'50px'}}>{title} ...</h5>
-                            <p className="card-text" style={{height:'50px'}}>{description} ...</p>
-                            <a href={newsUrl} rel='noreferal' target = "_blank" className="btn btn-primary btn-sm " style = {{marginTop:'20px', marginBottomBottom:'30px'}}>Read More</a>
-                            {/* Giving btn-sm class here to make the button smaller */}
+                {/* Making card from bootstrap here */}
+
+                <div className="card my-2 card-deck " style={{ borderRadius: '10px' }} >
+
+                    <img className="card-img-top" src={!imgUrl ? "https://images4.alphacoders.com/131/1315826.jpg" : imgUrl} alt="Card image cap" class="img-fluid" style={{ objectFit: "cover", height: "200px", width: "420px" }} />
+                    <div className="card-body">
+                        <h5 className="card-title" style={{ height: '50px', overflow: "clip" }}>{title} ...</h5>
+                        <p className="card-text" style={{ height: '50px', overflow: "clip", marginBottom: "0", }}>{description}...
+                        </p>
+                        <p class="card-text" style={{height:"25px",marginBottom:"0", overflow:"clip"}}><small class="text-muted">By {!author ? "Unknown" : author} on {new Date(date).toGMTString().slice(0, 11)}</small></p>
+
+
+                        <div style={{height:"45px", paddingTop:"5px", paddingBottom:"10px"}}>
+                            <a href={newsUrl} rel='noreferal' target="_blank" className="btn btn-dark btn-sm " style={{ overflow: "clip", marginTop: "7px" }}>Read More</a>
                         </div>
+
+                        {/* Giving btn-sm class here to make the button smaller */}
+                    </div>
                 </div>
             </div>
         )
