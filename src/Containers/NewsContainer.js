@@ -49,51 +49,51 @@ export class NewsContainer extends Component {
 
     }
 
-    async componentDidMount() {
+
+    makePage=async ()=>{
 
         let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-
-// Now we will use props to pass in these category and country
-
+        
+        
         let data = await fetch(url);
 
         let parseData = await data.json();
 
         console.log(parseData);
 
-        this.setState({
-            articles: parseData.articles,
+        await this.setState({ 
+            articles: parseData.articles, 
             totalArticles: parseData.totalResults,
-            loading: false,
-
+            loading: false
         });
+
+        // We have made the code optimized and cocide by making a different function for fetching the news so that we dont have to write these codes seprately for compnentdidmount, nectpage and previousage.
+
+    }
+
+
+
+
+    async componentDidMount() {
+
+        await this.makePage(this.state.page);
 
 
     }
+
+    //componentDidMount() is a lifecycle method in React class components that is invoked automatically by React when a component is inserted (or "mounted") into the DOM. It's part of the component's lifecycle, which consists of various stages from creation to destruction.
+
+
 
     NextPage = async () => {
 
          
         this.setState({ loading: true })
-
+        
         await this.setState({ page: this.state.page + 1, })
-        
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    
 
-
-        console.log("Page = " + this.state.page);
-
-        let data = await fetch(url);
-
-        let parseData = await data.json();
-
-        console.log(parseData);
-
-        await this.setState({ articles: parseData.articles, loading: false, });
-
-        // Scroll to the top of the container
-        
-        window.scrollTo(0, 0);
+        await this.makePage();
 
 
 
@@ -105,22 +105,7 @@ export class NewsContainer extends Component {
         this.setState({ loading: true })
         await this.setState({ page: this.state.page - 1, })
 
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-
-        // use & to include every source (to format a correct url)
-
-
-        console.log("Page = " + this.state.page);
-
-        let data = await fetch(url);
-
-        let parseData = await data.json();
-
-        console.log(parseData);
-
-        await this.setState({ articles: parseData.articles, loading: false, });
-
-        window.scrollTo(0, 0);
+        await this.makePage();
 
 
 
@@ -173,7 +158,7 @@ export class NewsContainer extends Component {
                             {this.state.articles.map((element) => (
 
                                 <div className="col-md-4 " >
-                                    < NewsItems title={element.title ? element.title.slice(0, 40) : ""} key={element.url} description={element.description ? element.description.slice(0,50) : "Click On To Read More"} newsUrl={element.url} imgUrl={element.urlToImage} author = {element.author?element.author.slice(0,14):"Unknown"} date = {element.publishedAt}/>
+                                    < NewsItems title={element.title ? element.title : ""} key={element.url} description={element.description ? element.description.slice(0,75) : "Click On To Read More"} newsUrl={element.url} imgUrl={element.urlToImage} author = {element.author?element.author.slice(0,14):"Unknown"} date = {element.publishedAt}/>
                                     {/* Passing title and newsitems as a prop */}
                                     {/* Whenever we use map function we have to make a key for every element in it so we are assigning a key of url of a news since it is unique for each element */}
                                 </div>
