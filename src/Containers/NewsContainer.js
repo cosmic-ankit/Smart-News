@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 export class NewsContainer extends Component {
 
 
+    
     // Initializing default props and proptypes here. In class based componet we use static to craete default props and proptypes
 
     static defaultProps = {
@@ -22,30 +23,40 @@ export class NewsContainer extends Component {
         pageSize: PropTypes.number
     }
 
+    
     // business entertainment general health science sports technology
-
-
+    
+    
     // We have made an array by article name and have
     // articles =
     //     [
-    //     ]
-    // This article is an array of onjects
+        //     ]
+        // This article is an array of onjects
+        
+        
+        
+        
+        
+        capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        
 
-    constructor() // Whenever the object of this class will be make it will run, hence it will run for each time newsItem would be called.
+    constructor(props) // Whenever the object of this class will be make it will run, hence it will run for each time newsItem would be called.
     {
-        super();
+        //The super() function is called inside the constructor to make sure that the constructor of the parent class (in this case, React.Component) is called first. This is necessary to properly set up the component before any additional initialization is done.
+
+        
+        
+        super(props);
+        // to use props in constructor we have to give props to both constructor and super
         this.state = {
             articles: [],
             loading: true,
             page: 1,
         }
-
-        
-
-        
-
-
-
+        document.title = `Smart News - ${this.capitalizeFirstLetter(this.props.category)}`;
+        // We use this.functionName in class based components to access the function
 
     }
 
@@ -76,7 +87,7 @@ export class NewsContainer extends Component {
 
     async componentDidMount() {
 
-        await this.makePage(this.state.page);
+        await this.makePage();
 
 
     }
@@ -137,7 +148,6 @@ export class NewsContainer extends Component {
                         <div className="text-center">
                             {this.state.loading && <Spinner />}
                         </div>
-
 
 
 
