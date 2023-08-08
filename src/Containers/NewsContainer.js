@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import NewsItems from './NewsItems';
 import Spinner from './Spinner';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import InfiniteScroll from "react-infinite-scroll-component";
 //impt to import proptypes
 
 export class NewsContainer extends Component {
@@ -13,7 +14,8 @@ export class NewsContainer extends Component {
     static defaultProps = {
         country: 'us',
         category: 'general',
-        pageSize: `15`
+        pageSize: `15`,
+        
 
     }
 
@@ -54,6 +56,8 @@ export class NewsContainer extends Component {
             articles: [],
             loading: true,
             page: 1,
+            totalArticles:0,
+            
         }
         document.title = `Smart News - ${this.capitalizeFirstLetter(this.props.category)}`;
         // We use this.functionName in class based components to access the function
@@ -125,6 +129,28 @@ export class NewsContainer extends Component {
 
     }
 
+    fetchMoreData = async () => 
+    {
+        this.setState({ page: this.state.page+1});
+
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        
+        
+        let data = await fetch(url);
+
+        let parseData = await data.json();
+
+        console.log(parseData);
+
+        await this.setState({ 
+            articles: this.state.articles.concat(parseData.articles), 
+            totalArticles: parseData.totalResults,
+
+        });
+
+
+    }
+
     // Its a promise function which will get exectued after the newscontainer will render, then it will fetch the data . Parsedata will wait till it wont fetch the data then it will convert it into .json file. And then we will set the article to the parsed data.
 
     render() {
@@ -136,7 +162,7 @@ export class NewsContainer extends Component {
             <>
                 <div>
 
-                    <div className="container my-3 align-items-center justify-content-center">
+                    <div >
 
 
 
@@ -163,6 +189,23 @@ export class NewsContainer extends Component {
                         {/* Creating row and columns. In bootstrap a row can have 12 column, md-4 means this column will take the size of 4 columns. Md class is used to decide the width of a column */}
 
 
+<div >
+
+
+                        <InfiniteScroll
+          dataLength={this.state.articles.length}
+          next={this.fetchMoreData}
+          hasMore={this.state.articles.length<this.state.totalArticles}
+
+          loader={<div className="text-center">
+          <Spinner/>
+          </div>}
+          
+          
+        >
+
+            <div className='container' style={{overflow:'hidden'}}>
+
               {    !this.state.loading &&      <div className="row">
 
                             {this.state.articles.map((element) => (
@@ -176,8 +219,13 @@ export class NewsContainer extends Component {
 
                             {/* // It uses the map function to iterate      over the articles array in the state and renders a <NewsItems/> component for each element. The key prop is set to element.url to provide a unique identifier for each rendered component. */}
 
-                        </div>
+                        </div>          
     }
+
+</div>
+
+</InfiniteScroll>
+</div>
 
                     </div>
 
@@ -190,7 +238,7 @@ export class NewsContainer extends Component {
 
 
 
-                <div className="d-flex justify-content-between container my-4">
+                {/* <div className="d-flex justify-content-between container my-4">
 
                     <button disabled={this.state.page <= 1} type="button" className="btn btn-dark" onClick={this.PrevPage}> &larr;	Previous</button>
 
@@ -200,7 +248,7 @@ export class NewsContainer extends Component {
                     {/* We have fixed the bug here the api gives maximum 100 articles, so we have written the condition for it over here */}
 
                     {/*  We use this.props.propName ti access props in class based component */}
-                </div>
+               {/* </div> */}
 
             </>
 
