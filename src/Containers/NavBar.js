@@ -35,6 +35,8 @@ export class NavBar extends Component {
 
         
 
+        
+
         <li className="nav-item">
          <NavLink className="nav-link" to="/Health">Health</NavLink>
         </li>

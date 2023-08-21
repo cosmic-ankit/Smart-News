@@ -1,4 +1,6 @@
 import logo from './logo.svg';
+
+
 import './App.css';
 import {
   BrowserRouter,
@@ -10,11 +12,25 @@ import {
 import React, { Component } from 'react'
 import NavBar from './Containers/NavBar';
 import NewsContainer from './Containers/NewsContainer';
+import LoadingBar from 'react-top-loading-bar'
 // import Spinner from './Containers/Spinner';
 
 export class App extends Component {
 
   
+
+  
+state = {
+  progress : 0,
+  // Here we have craeted a state and do thr progess key to be 0.
+}
+
+
+setProgress(progress){
+  this.setState({progress: progress})
+  //Updating thr progress over here. Now we will pass this function to news component and update the progress as require.
+  //  We are adding the top loading bar below the navbar, the top loading bar will uopdate its value to 100 as we render the page or update the code/* setProgress = {this.setProgress} */
+}
 
   render() {
     return (
@@ -26,19 +42,29 @@ export class App extends Component {
 
             <NavBar   />
 
+            {/* <LoadingBar // Adding react top loading bar functions here 
+        height={3}
+        color='#f11946'
+        progress={this.state.progress}
+
+        // There is a problem in react version of top loading bar as it is using the hook accprding to the previous version so commenting it out in the code
+
+      /> */}
+
+
             <Routes>
-            <Route path='/'   element={ < NewsContainer key = "/"  pageSize={15} category={'general'} />}  />
+            <Route path='/'   /* setProgress = {this.setProgress} */element={ < NewsContainer key = "/"  pageSize={15} category={'general'} />}  />
             
             <Route path='/Business'  element={ < NewsContainer  key = "Business"  pageSize={15} category={'business'} />}  />
 
 
-            <Route path='/Health'  element={ < NewsContainer  key = "Health"  pageSize={15} category={'health'} />}  />
+            <Route path='/Health' /* setProgress = {this.setProgress} */ element={ < NewsContainer  key = "Health"  pageSize={15} category={'health'} />}  />
 
-            <Route path='/Science'   element={ < NewsContainer  key = "Science"  pageSize={15} category={'science'} />}  />
+            <Route path='/Science'  /* setProgress = {this.setProgress} */ element={ < NewsContainer  key = "Science"  pageSize={15} category={'science'} />}  />
 
-            <Route path='/Sports'   element={ < NewsContainer key = "Sports"  pageSize={15} category={'sports'} />}  />
+            <Route path='/Sports'  /* setProgress = {this.setProgress} */ element={ < NewsContainer key = "Sports"  pageSize={15} category={'sports'} />}  />
 
-            <Route path='/Technology'  element={ < NewsContainer key = "Technology"   pageSize={15} category={'technology'} />}  />
+            <Route path='/Technology' /* setProgress = {this.setProgress} */ element={ < NewsContainer key = "Technology"   pageSize={15} category={'technology'} />}  />
 
             </Routes>
 

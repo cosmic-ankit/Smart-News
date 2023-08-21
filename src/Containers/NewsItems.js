@@ -16,7 +16,7 @@ export class NewsItems extends Component {
 
 
                 {/* Making card from bootstrap here */}
-
+  
                 <div className="card my-2 card-deck " style={{ borderRadius: '10px' }} >
 
                     <img className="card-img-top" src={!imgUrl ? "https://images4.alphacoders.com/131/1315826.jpg" : imgUrl} alt="Card image cap" class="img-fluid" style={{ objectFit: "cover", height: "200px", width: "420px" }} />

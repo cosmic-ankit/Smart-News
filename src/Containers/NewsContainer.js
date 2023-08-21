@@ -3,6 +3,7 @@ import NewsItems from './NewsItems';
 import Spinner from './Spinner';
 import PropTypes from 'prop-types';
 import InfiniteScroll from "react-infinite-scroll-component";
+
 //impt to import proptypes
 
 export class NewsContainer extends Component {
@@ -12,9 +13,9 @@ export class NewsContainer extends Component {
     // Initializing default props and proptypes here. In class based componet we use static to craete default props and proptypes
 
     static defaultProps = {
-        country: 'us',
+        country: 'in',
         category: 'general',
-        pageSize: `15`,
+        pageSize: '3',
         
 
     }
@@ -67,20 +68,25 @@ export class NewsContainer extends Component {
 
     makePage=async ()=>{
 
+        // this.props.setProgress(30);
+        
         let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         
         
         let data = await fetch(url);
-
+        // this.props.setProgress(50);
+        
         let parseData = await data.json();
-
+        // this.props.setProgress(70);
+        
         console.log(parseData);
-
+        
         await this.setState({ 
             articles: parseData.articles, 
             totalArticles: parseData.totalResults,
             loading: false
         });
+        // this.props.setProgress(100);
 
         // We have made the code optimized and cocide by making a different function for fetching the news so that we dont have to write these codes seprately for compnentdidmount, nectpage and previousage.
 
@@ -106,27 +112,14 @@ export class NewsContainer extends Component {
         this.setState({ loading: true })
         
         await this.setState({ page: this.state.page + 1, })
-    
-
         await this.makePage();
-
-
-
-
     }
 
     PrevPage = async () => {
         
         this.setState({ loading: true })
         await this.setState({ page: this.state.page - 1, })
-
         await this.makePage();
-
-
-
-
-
-
     }
 
     fetchMoreData = async () => 
@@ -193,6 +186,7 @@ export class NewsContainer extends Component {
 
 
                         <InfiniteScroll
+
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
           hasMore={this.state.articles.length<this.state.totalArticles}
