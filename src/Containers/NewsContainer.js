@@ -13,7 +13,7 @@ export class NewsContainer extends Component {
     // Initializing default props and proptypes here. In class based componet we use static to craete default props and proptypes
 
     static defaultProps = {
-        country: 'in',
+        country: 'us',
         category: 'general',
         pageSize: '3',
         

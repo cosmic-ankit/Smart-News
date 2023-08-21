@@ -18,7 +18,7 @@ import LoadingBar from 'react-top-loading-bar'
 export class App extends Component {
 
   
-
+  apiKey = process.env.REACT_APP_API_KEY;
   
 state = {
   progress : 0,
@@ -29,7 +29,7 @@ state = {
 setProgress(progress){
   this.setState({progress: progress})
   //Updating thr progress over here. Now we will pass this function to news component and update the progress as require.
-  //  We are adding the top loading bar below the navbar, the top loading bar will uopdate its value to 100 as we render the page or update the code/* setProgress = {this.setProgress} */
+  //  We are adding the top loading bar below the navbar, the top loading bar will uopdate its value to 100 as we render the page or update the code/* setProgress = {this.setProgress} */ newsAPI = {this.apiKey}
 }
 
   render() {
@@ -53,18 +53,18 @@ setProgress(progress){
 
 
             <Routes>
-            <Route path='/'   /* setProgress = {this.setProgress} */element={ < NewsContainer key = "/"  pageSize={15} category={'general'} />}  />
+            <Route path='/'   /* setProgress = {this.setProgress} */ newsAPI = {this.apiKey}element={ < NewsContainer key = "/"  pageSize={15} category={'general'} />}  />
             
             <Route path='/Business'  element={ < NewsContainer  key = "Business"  pageSize={15} category={'business'} />}  />
 
 
-            <Route path='/Health' /* setProgress = {this.setProgress} */ element={ < NewsContainer  key = "Health"  pageSize={15} category={'health'} />}  />
+            <Route path='/Health' /* setProgress = {this.setProgress} */ newsAPI = {this.apiKey} element={ < NewsContainer  key = "Health"  pageSize={15} category={'health'} />}  />
 
-            <Route path='/Science'  /* setProgress = {this.setProgress} */ element={ < NewsContainer  key = "Science"  pageSize={15} category={'science'} />}  />
+            <Route path='/Science'  /* setProgress = {this.setProgress} */ newsAPI = {this.apiKey} element={ < NewsContainer  key = "Science"  pageSize={15} category={'science'} />}  />
 
-            <Route path='/Sports'  /* setProgress = {this.setProgress} */ element={ < NewsContainer key = "Sports"  pageSize={15} category={'sports'} />}  />
+            <Route path='/Sports'  /* setProgress = {this.setProgress} */ newsAPI = {this.apiKey} element={ < NewsContainer key = "Sports"  pageSize={15} category={'sports'} />}  />
 
-            <Route path='/Technology' /* setProgress = {this.setProgress} */ element={ < NewsContainer key = "Technology"   pageSize={15} category={'technology'} />}  />
+            <Route path='/Technology' /* setProgress = {this.setProgress} */ newsAPI = {this.apiKey} element={ < NewsContainer key = "Technology"   pageSize={15} category={'technology'} />}  />
 
             </Routes>
 
