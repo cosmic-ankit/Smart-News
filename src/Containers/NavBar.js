@@ -13,7 +13,7 @@ export class NavBar extends Component {
       <div>
 
 
-<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 
   <div className="container-fluid">
    <Link className="navbar-brand" to="/">Smart News</Link>

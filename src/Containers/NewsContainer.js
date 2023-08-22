@@ -124,10 +124,12 @@ export class NewsContainer extends Component {
 
     fetchMoreData = async () => 
     {
-        this.setState({ page: this.state.page+1});
-
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f7d94b82c6b943baa134848cc0cbe162&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+
+        // page was loading twice because setstate is a async function, url pahle fetch ho jata tha uske baad page +1 hota tha, so we have did +1 on fetchmore data manually and then did page+1. 
+        
+        this.setState({ page: this.state.page+1});
         
         let data = await fetch(url);
 
@@ -161,7 +163,7 @@ export class NewsContainer extends Component {
 
                         {/* Text centre is a class used to make the text centre in bootstrap */}
                         <div className="text-center my-4">
-                            <h1>News that makes u Smart</h1>
+                            <h1 style={{marginTop: '80px' }}>News that makes u Smart</h1>
                         </div>
 
                         <div className="text-center">
@@ -185,7 +187,7 @@ export class NewsContainer extends Component {
 <div >
 
 
-                        <InfiniteScroll
+         <InfiniteScroll
 
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
@@ -194,8 +196,7 @@ export class NewsContainer extends Component {
           loader={<div className="text-center">
           <Spinner/>
           </div>}
-          
-          
+
         >
 
             <div className='container' style={{overflow:'hidden'}}>
