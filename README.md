@@ -57,7 +57,7 @@ We welcome contributions to make Smart News even better! If you find any issues 
 
 ## Contact Us
 
-If you have any questions or feedback, don't hesitate to reach out to our team at cosmicankit3848@gmail.com
+If you have any questions or feedback, don't hesitate to reach out to me at cosmicankit3848@gmail.com
 Stay informed with Smart News – News that makes you smart!
 
 ---
