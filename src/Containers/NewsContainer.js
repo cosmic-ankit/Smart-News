@@ -4,6 +4,7 @@ import Spinner from './Spinner';
 import PropTypes from 'prop-types';
 import InfiniteScroll from "react-infinite-scroll-component";
 
+
 //impt to import proptypes
 
 export class NewsContainer extends Component {
@@ -13,7 +14,7 @@ export class NewsContainer extends Component {
     // Initializing default props and proptypes here. In class based componet we use static to craete default props and proptypes
 
     static defaultProps = {
-        country: 'us',
+        country: 'in',
         category: 'general',
         pageSize: '3',
         
@@ -162,8 +163,14 @@ export class NewsContainer extends Component {
 
 
                         {/* Text centre is a class used to make the text centre in bootstrap */}
-                        <div className="text-center my-4">
-                            <h1 style={{marginTop: '80px' }}>News that makes u Smart</h1>
+                        <div  style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px', marginBottom:'20px'}}>
+                      
+
+<img src="output-onlinepngtools.png" alt="No image" style={{ height:'100px', width:'100px', marginRight:'10px', display: 'inline'}} />
+
+ <h1 style={{ display:'inline' }}>News that makes u Smart</h1>
+
+                           
                         </div>
 
                         <div className="text-center">
