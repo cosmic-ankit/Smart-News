@@ -52,7 +52,7 @@ setProgress(progress){
       /> */}
 
 
-            <Routes>
+            <Routes>cd 
             <Route path='/'   /* setProgress = {this.setProgress} */ newsAPI = {this.apiKey}element={ < NewsContainer key = "/"  pageSize={15} category={'general'} />}  />
             
             <Route path='/Business'  element={ < NewsContainer  key = "Business"  pageSize={15} category={'business'} />}  />
